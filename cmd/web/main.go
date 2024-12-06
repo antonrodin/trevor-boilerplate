@@ -29,10 +29,15 @@ func main() {
 
 	render.SetAppConfig(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
-
 	fmt.Println("Server is running at http://localhost:3000")
 
-	_ = http.ListenAndServe(portNumber, nil)
+	server := &http.Server{
+		Addr:    ":3000",
+		Handler: routes(&app),
+	}
+
+	err = server.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
 }

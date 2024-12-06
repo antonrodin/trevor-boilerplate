@@ -6,5 +6,5 @@ I will adapt and test this for my own needs.
 How to run:
 
 ````
-go run cmd/web/main.go
+go run cmd/web/*.go
 ````
