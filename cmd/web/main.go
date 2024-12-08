@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/antonrodin/trevor-boilerplate/pkg/config"
 	"github.com/antonrodin/trevor-boilerplate/pkg/handlers"
 	"github.com/antonrodin/trevor-boilerplate/pkg/render"
@@ -12,31 +14,40 @@ import (
 
 const portNumber = ":3000"
 
+var app config.AppConfig
+var session *scs.SessionManager
+
 func main() {
 
-	var app config.AppConfig
+	// Some app config
+	app.InProduction = false
+	app.AppTitle = "Trevor Boilerplate"
 
-	templateCache, err := render.CreateTemplateCacheBetter()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// Session package
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	// Persist if browser is closed
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	// Check https or http
+	session.Cookie.Secure = app.InProduction
 
-	app.TemplateCache = templateCache
-	app.UseCache = true
+	// Add session to app
+	app.Session = session
 
+	// New repository so we can send global configuration to handlers
 	repo := handlers.CreateNewRepository(&app)
 	handlers.SetNewRepo(repo)
-
 	render.SetAppConfig(&app)
 
 	fmt.Println("Server is running at http://localhost:3000")
 
 	server := &http.Server{
-		Addr:    ":3000",
+		Addr:    portNumber,
 		Handler: routes(&app),
 	}
 
-	err = server.ListenAndServe()
+	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}

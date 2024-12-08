@@ -1,5 +1,4 @@
-{{ template "base"}}
+{{ template "base" .}}
 {{ define "content"}}
-<h1>About Page</h1>
-<p>Pepe Caracola!!!</p>
+<h1>{{.Title}}</h1>
 {{ end }}

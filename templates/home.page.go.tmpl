@@ -1,4 +1,5 @@
-{{ template "base"}}
+{{ template "base" .}}
 {{ define "content"}}
 <h1>Home Page</h1>
+<p>{{.Count}} items are made of {{.Material}}</p>
 {{ end }}
