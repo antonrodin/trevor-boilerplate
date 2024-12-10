@@ -1,0 +1,17 @@
+{{ template "base" . }}
+{{ define "content" }}
+    <h1>Test a CSRF protection</h1>
+    <form method="POST" action="/form">
+        <p>
+            <label for="">CSRF Token</label>
+            <input type="text" name="csrf_token" value="{{.CsrfToken}}">
+        </p>
+        <p>
+            <label for="">Just random name</label>
+            <input type="text" name="name" value="Anton">
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{{ end }}

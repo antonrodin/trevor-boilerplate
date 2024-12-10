@@ -8,6 +8,7 @@ import (
 
 	"github.com/antonrodin/trevor-boilerplate/pkg/config"
 	"github.com/antonrodin/trevor-boilerplate/pkg/render"
+	"github.com/justinas/nosurf"
 )
 
 var Repo *Repository
@@ -78,4 +79,25 @@ func (m *Repository) StoreIp(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func (m *Repository) Form(w http.ResponseWriter, r *http.Request) {
+
+	type TemplateData struct {
+		CsrfToken string
+	}
+
+	data := TemplateData{
+		nosurf.Token(r),
+	}
+
+	err := render.GetTemplate("form.page.go.tmpl").Execute(w, data)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (m *Repository) Process(w http.ResponseWriter, r *http.Request) {
+	name := r.Form.Get("name")
+	w.Write([]byte(fmt.Sprintf("Accept post request: %s", name)))
 }

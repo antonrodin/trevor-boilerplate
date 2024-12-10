@@ -21,6 +21,8 @@ func routes(app *config.AppConfig) http.Handler {
 	router.Get("/about", handlers.Repo.About)
 	router.Get("/test", handlers.Repo.Test)
 	router.Get("/store-ip", handlers.Repo.StoreIp)
+	router.Get("/form", handlers.Repo.Form)
+	router.Post("/form", handlers.Repo.Process)
 
 	return router
 }
