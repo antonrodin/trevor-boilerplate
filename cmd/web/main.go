@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/antonrodin/trevor-boilerplate/pkg/config"
-	"github.com/antonrodin/trevor-boilerplate/pkg/handlers"
-	"github.com/antonrodin/trevor-boilerplate/pkg/render"
+	"github.com/antonrodin/trevor-boilerplate/internal/config"
+	"github.com/antonrodin/trevor-boilerplate/internal/handlers"
+	"github.com/antonrodin/trevor-boilerplate/internal/render"
 )
 
 const portNumber = ":3000"

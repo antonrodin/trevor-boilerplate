@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/antonrodin/trevor-boilerplate/pkg/config"
-	"github.com/antonrodin/trevor-boilerplate/pkg/render"
+	"github.com/antonrodin/trevor-boilerplate/internal/config"
+	"github.com/antonrodin/trevor-boilerplate/internal/render"
 	"github.com/justinas/nosurf"
 )
 

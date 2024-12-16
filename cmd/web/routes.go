@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/antonrodin/trevor-boilerplate/pkg/config"
-	"github.com/antonrodin/trevor-boilerplate/pkg/handlers"
+	"github.com/antonrodin/trevor-boilerplate/internal/config"
+	"github.com/antonrodin/trevor-boilerplate/internal/handlers"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -23,6 +23,10 @@ func routes(app *config.AppConfig) http.Handler {
 	router.Get("/store-ip", handlers.Repo.StoreIp)
 	router.Get("/form", handlers.Repo.Form)
 	router.Post("/form", handlers.Repo.Process)
+
+	// User
+	router.Get("/user/create", handlers.Repo.UserCreate)
+	router.Post("/user/store", handlers.Repo.UserStore)
 
 	return router
 }

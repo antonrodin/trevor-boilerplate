@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/antonrodin/trevor-boilerplate/pkg/config"
+	"github.com/antonrodin/trevor-boilerplate/internal/config"
 )
 
 var app *config.AppConfig
